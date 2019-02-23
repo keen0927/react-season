@@ -1,27 +1,57 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import SeosonDisplay from './SeosonDisplay';
+// import SeosonDisplay from './SeosonDisplay';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        this.state = {
-            lat: null,
-        };
+    //     this.state = {
+    //         lat: null,
+    //     };
+
+    //     window.navigator.geolocation.getCurrentPosition(
+    //         (position) => {
+    //             this.setState({
+    //                 lat: position.coords.latitude
+    //             });
+    //         },
+    //         (err) => console.log(err)
+    //     );        
+    // }
+
+    state = {
+        lat: null,
+        errorMessage: ''
+    }
+
+    componentWillMount() {
+        window.navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({
+                    lat: position.coords.latitude
+                });
+            },
+            (err) => {
+                this.setState({
+                    errorMessage: err.message
+                })
+            }
+        );        
     }
 
 
+
     render() {
-        window.navigator.geolocation.getCurrentPosition(
-            (position) => console.log(position),
-            (err) => console.log(err)
-        );
-        return (
-            <div>
-                Latitude: {this.state.lat}
-            </div>
-        )
+        if (this.state.errorMessage && !this.state.lat) {
+            return <div>Error: {this.state.errorMessage}</div>
+        }
+
+        if (!this.state.errorMessage && this.state.lat) {
+            return <div>latitude: {this.state.lat}</div>
+        }
+
+        return <div>Loading!</div>;
     }
 }
 
