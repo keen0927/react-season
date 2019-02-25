@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-// import SeosonDisplay from './SeosonDisplay';
+import SeosonDisplay from './SeosonDisplay';
 
 class App extends React.Component {
     // constructor(props) {
@@ -25,7 +25,7 @@ class App extends React.Component {
         errorMessage: ''
     }
 
-    componentWillMount() {
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
             (position) => {
                 this.setState({
@@ -40,10 +40,6 @@ class App extends React.Component {
         );        
     }
 
-    componentDidMount() {
-        console.log('componentDidMount')
-    }
-
     componentDidUpdate() {
         console.log('just update')
     }
@@ -54,7 +50,7 @@ class App extends React.Component {
         }
 
         if (!this.state.errorMessage && this.state.lat) {
-            return <div>latitude: {this.state.lat}</div>
+            return <SeosonDisplay lat={this.state.lat} />
         }
 
         return <div>Loading!</div>;
