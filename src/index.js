@@ -1,24 +1,9 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import SeosonDisplay from './SeosonDisplay';
+import Spinner from './Spinner';
 
 class App extends React.Component {
-    // constructor(props) {
-    //     super(props);
-
-    //     this.state = {
-    //         lat: null,
-    //     };
-
-    //     window.navigator.geolocation.getCurrentPosition(
-    //         (position) => {
-    //             this.setState({
-    //                 lat: position.coords.latitude
-    //             });
-    //         },
-    //         (err) => console.log(err)
-    //     );        
-    // }
 
     state = {
         lat: null,
@@ -41,7 +26,7 @@ class App extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('just update')
+        console.log('just update');
     }
 
     render() {
@@ -53,7 +38,7 @@ class App extends React.Component {
             return <SeosonDisplay lat={this.state.lat} />
         }
 
-        return <div>Loading!</div>;
+        return <Spinner message="Please Accept location request" />;
     }
 }
 
