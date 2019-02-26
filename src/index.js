@@ -25,10 +25,6 @@ class App extends React.Component {
         );        
     }
 
-    componentDidUpdate() {
-        console.log('just update');
-    }
-
     render() {
         if (this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage}</div>
